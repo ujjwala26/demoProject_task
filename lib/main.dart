@@ -1,16 +1,13 @@
 
 
-import 'package:demoproject/bloc/counter_bloc.dart';
-import 'package:demoproject/changeText/bloc/change_text_bloc.dart';
-import 'package:demoproject/colorChange/bloc/change_color_bloc.dart';
-import 'package:demoproject/learningPage/bloc/learning_page_bloc.dart';
-import 'package:demoproject/screens/changeColor_screen.dart';
-import 'package:demoproject/screens/change_text.dart';
-import 'package:demoproject/screens/learning_page.dart';
-import 'package:demoproject/screens/services_page.dart';
-import 'package:demoproject/screens/toggle_button.dart';
-import 'package:demoproject/servicesPage/bloc/services_bloc.dart';
-import 'package:demoproject/toggleButton/bloc/toggle_button_bloc.dart';
+import 'package:demoproject/features/learnings/presentation/pages/learning_page.dart';
+import 'package:demoproject/presentation/bloc/counterPage/counter_bloc.dart';
+import 'package:demoproject/presentation/bloc/changeText/bloc/change_text_bloc.dart';
+import 'package:demoproject/presentation/bloc/colorChange/bloc/change_color_bloc.dart';
+import 'package:demoproject/features/learnings/presentation/bloc/learningPage/learning_page_bloc.dart';
+import 'package:demoproject/presentation/bloc/toggleButton/bloc/toggle_button_bloc.dart';
+import 'package:demoproject/features/services/presentation/bloc/bloc/servicesbloc_bloc.dart';
+import 'package:demoproject/features/services/presentation/pages/service_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,7 +38,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context)=> ChangeTextBloc()),
           BlocProvider(create: (context)=> ChangeColorBloc()),
           BlocProvider(create: (context)=> LearningPageBloc()),
-          BlocProvider(create: (context) => ServicesBloc(),
+          BlocProvider(create: (context) => ServicesblocBloc(),
            
           )
 
