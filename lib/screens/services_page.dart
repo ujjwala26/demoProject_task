@@ -135,17 +135,37 @@ class ServicesPage extends StatelessWidget {
                     const SizedBox(height: 10),
 
                    
-                    for (var p in providerList)
-                      providerCard(
-                        image: p.image,
-                        name: p.name,
-                        address: p.address,
-                        type: p.type,
-                        rating: p.rating,
-                        jobs: p.jobs,
-                        price: p.price,
-                        context: context,
-                      ),
+                    // for (var p in providerList)
+                    //   providerCard(
+                    //     image: p.image,
+                    //     name: p.name,
+                    //     address: p.address,
+                    //     type: p.type,
+                    //     rating: p.rating,
+                    //     jobs: p.jobs,
+                    //     price: p.price,
+                    //     context: context,
+                    //   ),
+                    ListView.builder(
+                      itemCount:providerList.length,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context , index){
+                        final p = providerList[index];
+
+                        return providerCard(
+                          image: p.image, 
+                          name: p.name, 
+                          address: p.address, 
+                          type: p.type, 
+                          rating: p.rating, 
+                          jobs: p.jobs,
+                           price: p.price, 
+                          context: context
+                          );
+                        
+                      
+                    })
                   ],
                 ),
               ),
