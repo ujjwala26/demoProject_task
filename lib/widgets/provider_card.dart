@@ -41,20 +41,20 @@ Widget providerCard({
                 ),
               ),
 
-              const SizedBox(height: 4),
+               SizedBox(height: height * 0.01),
               Text(
                 address,
                 style: TextStyle(color: Colors.grey.shade600, fontSize: 13),
               ),
 
-              const SizedBox(height: 4),
+               SizedBox(height: height * 0.01),
               Text(
                 type,
                 style: const TextStyle(fontSize: 14, color: Colors.black87),
               ),
 
-              const Divider(),
-              const SizedBox(height: 6),
+               Divider(),
+               SizedBox(height: height * 0.01 ),
 
               Row(
                 children: [
@@ -79,7 +79,7 @@ Widget providerCard({
                     ),
                   ),
 
-                  const SizedBox(width: 8),
+                   SizedBox(width: width * 0.02),
                   Text(
                     "$jobs Jobs",
                     style: const TextStyle(
@@ -88,7 +88,7 @@ Widget providerCard({
                     ),
                   ),
 
-                  const Spacer(),
+                   Spacer(),
                   Text(
                     "\$$price",
                     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
