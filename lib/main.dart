@@ -1,9 +1,6 @@
 
-
-import 'package:demoproject/features/learnings/presentation/pages/learning_page.dart';
 import 'package:demoproject/features/services/presentation/pages/service_page.dart';
 import 'package:demoproject/features/signup/presentation/bloc/bloc/sign_up_bloc.dart';
-import 'package:demoproject/features/signup/presentation/pages/sign_up.dart';
 import 'package:demoproject/features/singIn/presentation/bloc/bloc/sign_in_bloc.dart';
 import 'package:demoproject/features/singIn/presentation/pages/sign_in.dart';
 import 'package:demoproject/presentation/bloc/counterPage/counter_bloc.dart';
