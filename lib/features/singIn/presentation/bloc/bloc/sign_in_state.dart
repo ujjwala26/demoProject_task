@@ -1,7 +1,7 @@
 part of 'sign_in_bloc.dart';
 
-@immutable
-sealed class SignInState {}
+
+abstract class SignInState {}
 
 final class SignInInitial extends SignInState {}
 

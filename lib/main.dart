@@ -1,4 +1,5 @@
 
+import 'package:demoproject/features/home/presentation/bloc/bloc/home_bloc_bloc.dart';
 import 'package:demoproject/features/services/presentation/pages/service_page.dart';
 import 'package:demoproject/features/signup/presentation/bloc/bloc/sign_up_bloc.dart';
 import 'package:demoproject/features/singIn/presentation/bloc/bloc/sign_in_bloc.dart';
@@ -40,7 +41,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context)=> LearningPageBloc()),
           BlocProvider(create: (context) => ServicesblocBloc(),),
           BlocProvider(create: (context)=> SignInBloc()),
-          BlocProvider(create: (context)=> SignUpBloc())
+          BlocProvider(create: (context)=> SignUpBloc()),
+          BlocProvider(create: (context)=> HomeBlocBloc()),
+          
 
       ], child: ServicesPage() ),
     );
