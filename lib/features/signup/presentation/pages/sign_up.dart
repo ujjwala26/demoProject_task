@@ -22,7 +22,7 @@ class _SignUpPageState extends State<SignUpPage> {
       body: Stack(
         children: [
        const SignUpBackground(),
-       SignUpForm(),
+       const SignUpForm(),
        ],
       ),
      );

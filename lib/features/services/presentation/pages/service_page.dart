@@ -70,10 +70,11 @@ class ServicesPage extends StatelessWidget {
               const SizedBox(height: 20),
 
              
+              //SearchBar(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Transform.translate(
-                  offset: const Offset(0, -60),
+                  offset: const Offset(0, -50),
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     height: 80,
