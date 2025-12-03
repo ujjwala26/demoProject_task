@@ -1,7 +1,6 @@
 part of 'sign_in_bloc.dart';
 
-@immutable
-sealed class SignInEvent {}
+ class SignInEvent {}
 
 class SignInButtonPressed extends SignInEvent {
   final String email;
