@@ -1,12 +1,17 @@
 part of 'sign_in_bloc.dart';
 
- class SignInEvent {}
+abstract class SignInEvent {}
 
 class SignInButtonPressed extends SignInEvent {
-  final String email;
+  final String username;
+  //final String email;
   final String password;
 
-  SignInButtonPressed(this.email, this.password);
+  SignInButtonPressed(
+    //this.email, 
+    this.username,
+    this.password,
+    );
 }
 
 

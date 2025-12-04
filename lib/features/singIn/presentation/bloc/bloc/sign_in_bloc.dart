@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
@@ -9,31 +10,86 @@ part 'sign_in_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   SignInBloc() : super(SignInInitial()) {
-    on<SignInButtonPressed>((event, emit) async {
-      emit(SignInLoading()); 
+    on<SignInButtonPressed>(signInButtonPressed);
+    // on<SignInButtonPressed>((event, emit) async {
+    //   emit(SignInLoading()); 
+    //   try{
+    //         final response = await http.post(Uri.parse("https://fakestoreapi.com/auth/login"),
+    //         body: jsonEncode({
+    //           "username" : event.password,
+    //           //"email" : event.email,
+    //           "password" : event.username,
+    //         }),
+    //         headers: {"Content-Type": "application/json"},);
+    //         if(response.statusCode==201){
+    //           final data = jsonDecode(response.body);
+    //           final token=data["token"];
+    //           print("token : $token");
+    //           emit(SignInSuccess());
 
-      // await Future.delayed(Duration(seconds: 1)); 
+    //         }else{
+    //           emit(SignInFailure("invalid credentials"));
+    //         }
 
-      // if (event.email == "test@gmail.com" && event.password == "123456") {
-      //   emit(SignInSuccess());
-      // } else {
-      //   emit(SignInFailure("Invalid email or password"));
-      // }
 
-      Future<void> _login(
+    //       }catch(e){
+    //         emit(SignInFailure(e.toString()));
 
-        SignInButtonPressed event , Emitter<SignInState>emit)async{
-          emit(SignInLoading());
+    //       }
 
-          try{
-            final response = await http.post(Uri.parse(""),
+    //   // await Future.delayed(Duration(seconds: 1)); 
+
+    //   // if (event.email == "test@gmail.com" && event.password == "123456") {
+    //   //   emit(SignInSuccess());
+    //   // } else {
+    //   //   emit(SignInFailure("Invalid email or password"));
+    //   // }
+
+    //   Future<void> login(
+
+    //     SignInButtonPressed event , Emitter<SignInState>emit)async{
+    //       emit(SignInLoading());
+
+    //       try{
+    //         final response = await http.post(Uri.parse("https://fakestoreapi.com/auth/login"),
+    //         body: jsonEncode({
+    //           "username" : event.username,
+    //           //"email" : event.email,
+    //           "password" : event.password,
+    //         }),
+    //         headers: {"Content-Type": "application/json"},);
+    //         if(response.statusCode==200){
+    //           final data = jsonDecode(response.body);
+    //           final token=data["token"];
+    //           print("token : $token");
+    //           emit(SignInSuccess());
+
+    //         }else{
+    //           emit(SignInFailure("invalid credentials"));
+    //         }
+
+
+    //       }catch(e){
+    //         emit(SignInFailure(e.toString()));
+
+    //       }
+    //     }
+    // });
+  }
+
+  FutureOr<void> signInButtonPressed(SignInButtonPressed event, Emitter<SignInState> emit)async {
+    try{
+            final response = await http.post(Uri.parse("https://fakestoreapi.com/auth/login"),
             body: jsonEncode({
-              "email" : event.email,
+              "username" : event.username,
+              //"email" : event.email,
               "password" : event.password,
             }),
-            headers: {"Content - Type": "application/json"},);
-            if(response.statusCode==200){
+            headers: {"Content-Type": "application/json"},);
+            if(response.statusCode==201){
               final data = jsonDecode(response.body);
+              final token=data["token"];
+              print("token : $token");
               emit(SignInSuccess());
 
             }else{
@@ -45,7 +101,5 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
             emit(SignInFailure(e.toString()));
 
           }
-        }
-    });
   }
 }
