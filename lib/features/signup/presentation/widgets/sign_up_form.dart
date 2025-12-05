@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:demoproject/features/signup/data/image_picker_services.dart';
 import 'package:demoproject/features/singIn/presentation/pages/sign_in.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:demoproject/presentation/pages/cart_page.dart';
+import 'package:demoproject/features/home/presentation/pages/cart_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {

@@ -5,8 +5,8 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    // final height = MediaQuery.of(context).size.height;
+    // final width = MediaQuery.of(context).size.width;
     return  Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Transform.translate(

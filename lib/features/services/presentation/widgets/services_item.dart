@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 Widget serviceItem(String img, String title, BuildContext context) {
   final height = MediaQuery.of(context).size.height;
-  final width = MediaQuery.of(context).size.width;
+  // final width = MediaQuery.of(context).size.width;
 
   return Container(
     margin: const EdgeInsets.all(8),
