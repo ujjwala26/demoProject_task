@@ -77,19 +77,19 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     // });
   }
 
-  FutureOr<void> signInButtonPressed(SignInButtonPressed event, Emitter<SignInState> emit)async {
+  Future<void> signInButtonPressed(SignInButtonPressed event, Emitter<SignInState> emit)async {
     try{
-            final response = await http.post(Uri.parse("https://fakestoreapi.com/auth/login"),
+            final response = await http.post(Uri.parse("http://3.110.154.53:8001/api/token/"),
             body: jsonEncode({
-              "username" : event.username,
+              "userName" : event.userName,
               //"email" : event.email,
               "password" : event.password,
             }),
             headers: {"Content-Type": "application/json"},);
-            if(response.statusCode==201){
-              final data = jsonDecode(response.body);
-              final token=data["token"];
-              print("token : $token");
+            if(response.statusCode==200){
+              //final data = jsonDecode(response.body);
+              // final token=data["token"];
+              // print("token : $token");
               emit(SignInSuccess());
 
             }else{

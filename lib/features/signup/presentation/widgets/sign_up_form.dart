@@ -1,7 +1,10 @@
 import 'dart:io';
+import 'package:demoproject/features/signup/presentation/bloc/bloc/sign_up_bloc.dart';
+import 'package:demoproject/features/signup/presentation/widgets/text_form_field.dart';
 import 'package:demoproject/features/singIn/presentation/pages/sign_in.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 
@@ -14,15 +17,34 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   File? _selectedImage;
-  @override
-  Widget build(BuildContext context) {
 
-    final usernameController = TextEditingController();
+   final usernameController = TextEditingController();
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
     final confirmPasswordController = TextEditingController();
     final mobController = TextEditingController();
 
+    final firstNameController = TextEditingController();
+    final lastNameController = TextEditingController();
+    final ageController = TextEditingController();
+    
+    @override
+    void dispose() {
+    emailController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    ageController.dispose();
+    usernameController.dispose();
+    passwordController.dispose();
+
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    
 
     
     final height = MediaQuery.of(context).size.height;
@@ -124,81 +146,41 @@ class _SignUpFormState extends State<SignUpForm> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        TextFormField(
-                         controller: usernameController,
-                          keyboardType: TextInputType.name,
-                          decoration: InputDecoration(
-                            labelText: "Your Name",
-                            labelStyle: TextStyle(color: Colors.grey.shade600),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey.shade300),
-                            ),
-                          ),
-                        ),
+                        textFieldWidget(controller: firstNameController, labelText: "First Name "),
+                        SizedBox(height: height / 35),
+                        textFieldWidget(controller: lastNameController, labelText: "Last Name"),
+                        SizedBox(height: height / 35),
+                        textFieldWidget(controller: ageController,labelText: "Age"),
+                        SizedBox(height: height / 35),
+                        textFieldWidget(controller: emailController, labelText: "Email"),
+                        SizedBox(height: height / 35),
+                        textFieldWidget(controller: usernameController, labelText: "Username"),
+
+                        
+                        // TextFormField(
+                        //   controller: passwordController,
+                        //   decoration: InputDecoration(
+                        //     labelText: "Your Password",
+                        //     labelStyle: TextStyle(color: Colors.grey.shade600),
+                        //     enabledBorder: UnderlineInputBorder(
+                        //       borderSide: BorderSide(color: Colors.grey.shade300),
+                        //     ),
+                        //     suffix: TextButton(
+                        //       onPressed: () {},
+                        //       child: Text(
+                        //         "Forgot?",
+                        //         style: TextStyle(
+                        //           fontWeight: FontWeight.bold,
+                        //           color: Colors.green.shade800,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         SizedBox(height: height / 35),
                         
+                        textFieldWidget(controller:confirmPasswordController,labelText: 'Password' ),
                         
-                        TextFormField(
-                          keyboardType: TextInputType.phone,
-                          controller: mobController,
-                          decoration: InputDecoration(
-                            labelText: "Your Mobile No",
-                            labelStyle: TextStyle(color: Colors.grey.shade600),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey.shade300),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: height / 35),
-                        
-                        
-                        TextFormField(
-                          keyboardType: TextInputType.emailAddress,
-                          controller: emailController,
-                          decoration: InputDecoration(
-                            labelText: "Your Email",
-                            labelStyle: TextStyle(color: Colors.grey.shade600),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey.shade300),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: height / 35),
-                        
-                        
-                        TextFormField(
-                          controller: passwordController,
-                          decoration: InputDecoration(
-                            labelText: "Your Password",
-                            labelStyle: TextStyle(color: Colors.grey.shade600),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey.shade300),
-                            ),
-                            suffix: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                "Forgot?",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.green.shade800,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: height / 35),
-                        
-                        
-                        TextFormField(
-                          controller: confirmPasswordController,
-                          decoration: InputDecoration(
-                            labelText: "Confirm Password",
-                            labelStyle: TextStyle(color: Colors.grey.shade600),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey.shade300),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -210,7 +192,18 @@ class _SignUpFormState extends State<SignUpForm> {
                   width: width * 0.9,
                   height: height * 0.050,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<SignUpBloc>().add(
+                      SignUpbuttonPressed(
+                        firstNameController.text,
+                        lastNameController.text,
+                        ageController.text,
+                        emailController.text,
+                        usernameController.text,
+                        passwordController.text,
+                      ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 10, 91, 11),
                       shape: RoundedRectangleBorder(
@@ -262,4 +255,5 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
           );
   }
+  
 }

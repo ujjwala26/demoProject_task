@@ -18,11 +18,11 @@ class _SignInFormState extends State<SignInForm> {
 
     //final emailController = TextEditingController();
     final passwordController = TextEditingController();
-    final usernameController= TextEditingController();
+    final userNameController= TextEditingController();
 
   @override
   void dispose() {
-    usernameController.dispose();
+    userNameController.dispose();
     passwordController.dispose();
     super.dispose();
   }
@@ -81,7 +81,7 @@ class _SignInFormState extends State<SignInForm> {
 
               TextFormField(
                 //controller: emailController,
-                controller: usernameController  ,
+                controller: userNameController  ,
                 decoration: InputDecoration(
                   labelText: "username",
                   //labelText: "Email",
@@ -129,12 +129,12 @@ class _SignInFormState extends State<SignInForm> {
                 height: width * 0.13,
                 child: ElevatedButton(
                   onPressed: () {
-                    log('UserName : ${usernameController.text}');
+                    log('UserName : ${userNameController.text}');
                     log('Password : ${passwordController.text}');
                     context.read<SignInBloc>().add(
                       SignInButtonPressed(
                         //email,
-                        usernameController.text,
+                        userNameController.text,
                          passwordController.text,
                       )
                     );
