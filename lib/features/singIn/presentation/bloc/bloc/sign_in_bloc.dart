@@ -89,10 +89,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
             headers: {"Content-Type": "application/json"},);
             if(response.statusCode==200){
               final data = jsonDecode(response.body);
-              final access= data["access"];
-              final refresh=data["refresh"];
+              final access = data["access"];
+              final refresh = data["refresh"];
 
-              await AppPrefs.saveTokens( access: access ,refresh : refresh);
+              await AppPrefs.saveTokens( 
+                access: access ,
+                refresh : refresh);
               emit(SignInSuccess());
 
             }else{

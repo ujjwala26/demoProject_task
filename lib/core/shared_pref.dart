@@ -7,8 +7,8 @@ class AppPrefs{
     SharedPreferences prefs= await SharedPreferences.getInstance();
     await prefs.setString('access_token', access);
     await prefs.setString('refresh_token', refresh);
-
-
+    
+ 
   }
   
   static Future<String?> getAccessToken()async{

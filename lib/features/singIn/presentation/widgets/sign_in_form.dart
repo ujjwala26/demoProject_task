@@ -68,7 +68,7 @@ class _SignInFormState extends State<SignInForm> {
             children: [
               SizedBox(height: height * 0.2),
               Text(
-                "Welcome\nBack",
+                "Welcome !",
                 style: TextStyle(
                   fontSize: height * 0.04,
                   height: 1.1,
@@ -156,49 +156,25 @@ class _SignInFormState extends State<SignInForm> {
                 ),
               ),
 
-              SizedBox(height: height * 0.02),
-
-              Row(
-                children: [
-                  Expanded(child: Divider(color: Colors.grey.shade300)),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      "or",
-                      style: TextStyle(fontSize: height * 0.02),
-                    ),
-                  ),
-                  Expanded(child: Divider(color: Colors.grey.shade300)),
-                ],
-              ),
-
-              SizedBox(height: height * 0.03),
-
               SizedBox(
-                width: double.infinity,
-                height: height * 0.05,
-                child: ElevatedButton(
-                  onPressed: () {
-                    
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 235, 250, 235),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      side: const BorderSide(color: Colors.green),
-                    ),
-                  ),
-                  child: Text(
-                    "Sign in with Google",
-                    style: TextStyle(
-                      color: Colors.green.shade900,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+                height: 20,
               ),
 
-              SizedBox(height: height * 0.05),
+            Center(
+              child: TextButton(
+                style: ButtonStyle(
+                  
+                ),
+                onPressed: (){
+              
+              }
+              , child: Text("Forgot Password?",style: TextStyle(
+                color: const Color.fromARGB(255, 10, 91, 11),
+                fontSize: 20,
+                fontWeight: FontWeight.bold
+              ),),),
+            ),
+            SizedBox(height: height * 0.05),
 
               Center(
                 child: Text.rich(

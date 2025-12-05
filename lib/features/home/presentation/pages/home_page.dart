@@ -1,5 +1,6 @@
 import 'package:demoproject/core/shared_pref.dart';
 import 'package:demoproject/features/home/presentation/pages/cart_page.dart';
+import 'package:demoproject/features/profile/presentation/pages/profile_page.dart';
 import 'package:demoproject/features/singIn/presentation/pages/sign_in.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,15 @@ const  HomePage({super.key});
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
+
+  final List<Widget> _pages = [
+    const HomePage(),
+    const ProfilePage(),
+    //const CartPage(),
+  ];
+
     final List<String> items=[
       "item1","item2","item3","item4","item5","item6",
      // "item1","item2","item3","item4","item5","item6",
@@ -18,7 +28,7 @@ class _HomePageState extends State<HomePage> {
 
     int _currentIndex = 0;
 
-  @override
+  @override 
   Widget build(BuildContext context) {
     final height =MediaQuery.of(context).size.height;
     final width =MediaQuery.of(context).size.width;
@@ -57,7 +67,8 @@ class _HomePageState extends State<HomePage> {
          
       
         ),
-        body: SingleChildScrollView(
+        body: 
+        SingleChildScrollView(
           child: Column(
              children: [
                         Padding(
@@ -147,23 +158,24 @@ class _HomePageState extends State<HomePage> {
           
           ),
         ),
+
         bottomNavigationBar: BottomNavigationBar(
-                  currentIndex: _currentIndex,
+          currentIndex: _currentIndex,
           selectedItemColor: Colors.green,
           unselectedItemColor: Colors.grey,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-      
-          
-          },
+          onTap:(index) {
+          setState(() {
+            _selectedIndex = index; 
+          });
+        },
+
       
           items: const [
       
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
             label: "home",
+            
             ),
             BottomNavigationBarItem(icon: Icon(Icons.shopping_cart),
             label: "cart"),
