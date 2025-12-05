@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:demoproject/core/shared_pref.dart';
 import 'package:http/http.dart' as http;
 
 
@@ -87,9 +88,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
             }),
             headers: {"Content-Type": "application/json"},);
             if(response.statusCode==200){
-              //final data = jsonDecode(response.body);
-              // final token=data["token"];
-              // print("token : $token");
+              final data = jsonDecode(response.body);
+              final access= data["access"];
+              final refresh=data["refresh"];
+
+              await AppPrefs.saveTokens( access: access ,refresh : refresh);
               emit(SignInSuccess());
 
             }else{
