@@ -1,5 +1,6 @@
 import 'package:demoproject/core/shared_pref.dart';
 import 'package:demoproject/features/home/presentation/pages/cart_page.dart';
+import 'package:demoproject/features/profile/presentation/pages/profile_page.dart';
 import 'package:demoproject/features/singIn/presentation/pages/sign_in.dart';
 import 'package:flutter/material.dart';
 
@@ -11,14 +12,21 @@ const  HomePage({super.key});
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
 
 
-
+  final List<Widget> _pages = [
+    const HomePage(),
+    const ProfilePage(),
+    //const CartPage(),
+  ];
 
     final List<String> items=[
       "item1","item2","item3","item4","item5","item6",
      // "item1","item2","item3","item4","item5","item6",
     ];
+
+    int _currentIndex = 0;
 
   @override 
   Widget build(BuildContext context) {
@@ -151,7 +159,33 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
 
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          selectedItemColor: Colors.green,
+          unselectedItemColor: Colors.grey,
+          onTap:(index) {
+          setState(() {
+            _selectedIndex = index; 
+          });
+        },
+
       
+          items: const [
+      
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+            label: "home",
+            
+            ),
+            BottomNavigationBarItem(icon: Icon(Icons.shopping_cart),
+            label: "cart"),
+            BottomNavigationBarItem(icon: Icon(Icons.shopping_bag),
+            label: "order"),
+            BottomNavigationBarItem(icon: Icon(Icons.person),
+            label: "profile"),
+      
+          ]
+          ),
       ),
     );
   }

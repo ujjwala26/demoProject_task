@@ -1,5 +1,6 @@
-import 'package:demoproject/core/shared_pref.dart';
-import 'package:demoproject/features/home/presentation/pages/home_page.dart';
+
+import 'package:demoproject/features/profile/presentation/widgets/section_tile.dart';
+import 'package:demoproject/features/profile/presentation/widgets/show_alertdialogue.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -8,17 +9,44 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
-     floatingActionButton: FloatingActionButton(
-          child: Text("logout"),
-          onPressed: ()async{
-          await AppPrefs.clearTokens();
-         Navigator.pushReplacement(
-  context,
-  MaterialPageRoute(builder: (_) => HomePage()),
-);
+      appBar: AppBar(
+        title: Text("profile"),
+      ),
+      body: Column(
+        children: [
+         ListTile(
+          leading:  CircleAvatar(
+           radius: 30,
+          ),
+          title: Text("Maria Karmila"),
+          subtitle: Text("email Id "),
 
-        }),
+         ),
+           sectionTitle("Account"),
+           MenuItem("Account Information"),
+           MenuItem("Account Information"),
+           MenuItem("Account Information"),
+           MenuItem("Account Information"),
+
+           sectionTitle("Privacy"),
+           MenuItem("Accoun Information"),
+           MenuItem("Account Information"),
+           MenuItem("Account Information"),
+           MenuItem("Account Information"),
+           
+           
+          ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Text("Logout"),
+        onPressed: () {
+          showLogoutPopup(context);
+        },
+      ),
     );
   }
+
+  
+    
+   
 }

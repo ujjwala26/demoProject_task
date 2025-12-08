@@ -3,6 +3,7 @@ import 'package:demoproject/core/shared_pref.dart';
 import 'package:demoproject/features/home/presentation/bloc/bloc/home_bloc_bloc.dart';
 import 'package:demoproject/features/home/presentation/pages/bottom_navigation.dart';
 import 'package:demoproject/features/home/presentation/pages/home_page.dart';
+import 'package:demoproject/features/profile/presentation/bloc/bloc/profile_bloc.dart';
 import 'package:demoproject/features/profile/presentation/pages/profile_page.dart';
 import 'package:demoproject/features/signup/presentation/bloc/bloc/sign_up_bloc.dart';
 import 'package:demoproject/features/signup/presentation/pages/sign_up.dart';
@@ -44,9 +45,10 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context)=> SignInBloc()),
           BlocProvider(create: (context)=> SignUpBloc()),
           BlocProvider(create: (context)=> HomeBlocBloc()),
+          BlocProvider(create: (context)=> ProfileBloc()),
           
 
-      ], child: BottomNavigation() ),
+      ], child: ProfilePage() ),
     );
   }
 }
