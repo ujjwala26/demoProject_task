@@ -1,3 +1,4 @@
+import 'package:demoproject/features/singIn/presentation/widgets/sign_in_background.dart';
 import 'package:flutter/material.dart';
 
 class OtpVerifiedSuccessfully extends StatelessWidget {
@@ -8,7 +9,7 @@ class OtpVerifiedSuccessfully extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          
+          SignInBackground(),
         ],
       ),
     );
