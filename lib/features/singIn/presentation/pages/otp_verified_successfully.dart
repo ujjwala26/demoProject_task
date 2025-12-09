@@ -39,6 +39,7 @@ class OtpVerifiedSuccessfully extends StatelessWidget {
     style: TextStyle(
       fontSize: 35,
       color: const Color.fromARGB(255, 10, 91, 11),
+      fontWeight: FontWeight.bold
     ),);
   }
   Widget VerifiedTextWidget(){

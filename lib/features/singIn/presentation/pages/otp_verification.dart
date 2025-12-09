@@ -1,10 +1,28 @@
-import 'package:demoproject/features/singIn/presentation/widgets/sign_in_background.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:demoproject/features/singIn/presentation/bloc/otpBloc/otp_verification_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
 
-class otpVerificationScreen extends StatelessWidget {
-  const otpVerificationScreen({super.key});
+import 'package:demoproject/features/singIn/presentation/widgets/sign_in_background.dart';
+
+class otpVerificationScreen extends StatefulWidget {
+  const otpVerificationScreen({
+    Key? key,
+    required this.email,
+    required this.phoneNumber,
+  }) : super(key: key);
+
+  final String email;
+  final String phoneNumber;
+
+  @override
+  State<otpVerificationScreen> createState() => _otpVerificationScreenState();
+}
+
+class _otpVerificationScreenState extends State<otpVerificationScreen> {
+  String otp = "";
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +64,6 @@ class otpVerificationScreen extends StatelessWidget {
     );
   }
 
- 
-
   Widget HeadingText(){
     return Text("OTP Verification",
     style: TextStyle(
@@ -65,6 +81,7 @@ class otpVerificationScreen extends StatelessWidget {
 
     ),);
   }
+
   Widget getPasswordTextWidget(){
     return Text("OTP has been sent to your gmail account",
     style: TextStyle(
@@ -80,7 +97,7 @@ class otpVerificationScreen extends StatelessWidget {
       fontSize: 18,
     ),);
   }
- 
+
   Widget pinInputWidget(){
     return Center(
       child: Form(
@@ -98,6 +115,7 @@ class otpVerificationScreen extends StatelessWidget {
     );
 
   }
+
   Widget resendCodeWidget(){
     return Text.rich(
        TextSpan(text: "Didn't receive the code? ",
@@ -123,11 +141,22 @@ class otpVerificationScreen extends StatelessWidget {
        );
 
   }
+
   Widget _VerifyButtonWidget(){
     return SizedBox(
       height: 50,
       width: 250,
       child: ElevatedButton(onPressed: (){
+        if(otp.length==6){
+          context.read<OtpBloc>().add((
+            email : widget.email,
+            phoneNumber : widget.phoneNumber,
+            otp:otp,
+          ) as OtpVerificationEvent);
+          
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please Enter Valid OTP")));
+        }
       
       }, 
       style: ElevatedButton.styleFrom(

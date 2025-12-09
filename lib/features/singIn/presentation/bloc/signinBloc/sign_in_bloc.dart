@@ -17,25 +17,29 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   Future<void> signInButtonPressed(SignInButtonPressed event, Emitter<SignInState> emit)async {
     try{
-            final response = await http.post(Uri.parse("http://3.110.154.53:8001/api/token/"),
+            final response = await http.post(Uri.parse("http://3.110.154.53:8001/api/sendOTP/"),
             body: jsonEncode({
-              "userName" : event.userName,
+              "email" : event.email
+              ,
               //"email" : event.email,
-              "password" : event.password,
+              "phoneNumber" : event.phoneNumber,
+              "orgId" : 1,
             }),
             headers: {"Content-Type": "application/json"},);
             if(response.statusCode==200){
               final data = jsonDecode(response.body);
-              final access = data["access"];
-              final refresh = data["refresh"];
+              // final access = data["access"];
+              // final refresh = data["refresh"];
 
-              await AppPrefs.saveTokens( 
-                access: access ,
-                refresh : refresh);
-              emit(SignInSuccess());
+              emit(SignInSuccess(data['message']));
+
+              // await AppPrefs.saveTokens( 
+              //   access: access ,
+              //   refresh : refresh);
+              //emit(SignInSuccess(data['message']));
 
             }else{
-              emit(SignInFailure("invalid credentials"));
+              emit(SignInFailure("Failed to send OTP"));
             }
 
 

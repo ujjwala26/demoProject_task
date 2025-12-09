@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:demoproject/features/home/presentation/pages/home_page.dart';
 import 'package:demoproject/features/signup/presentation/pages/sign_up.dart';
 import 'package:demoproject/features/singIn/presentation/bloc/signinBloc/sign_in_bloc.dart';
+import 'package:demoproject/features/singIn/presentation/pages/otp_verification.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,13 +18,17 @@ class SignInForm extends StatefulWidget {
 class _SignInFormState extends State<SignInForm> {
 
     //final emailController = TextEditingController();
-    final passwordController = TextEditingController();
-    final userNameController= TextEditingController();
+    // final passwordController = TextEditingController();
+    // final userNameController= TextEditingController();
+    final emailController= TextEditingController();
+    final phoneNumberController=TextEditingController();
 
   @override
   void dispose() {
-    userNameController.dispose();
-    passwordController.dispose();
+    // userNameController.dispose();
+    // passwordController.dispose();
+    emailController.dispose();
+    phoneNumberController.dispose();
     super.dispose();
   }
 
@@ -43,15 +48,17 @@ class _SignInFormState extends State<SignInForm> {
             ),
           );
         }else if (state is SignInSuccess){
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Login Successful!"),
-              backgroundColor: Colors.green,
-            ),
-          );
-          Navigator.pushReplacement(
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(
+          //     content: Text("Login Successful!"),
+          //     backgroundColor: Colors.green,
+          //   ),
+          // );
+          Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const HomePage()),
+            MaterialPageRoute(builder: (_) => otpVerificationScreen(phoneNumber: phoneNumberController.text,
+              email : emailController.text,
+            )),
           );
         }
       
@@ -80,10 +87,10 @@ class _SignInFormState extends State<SignInForm> {
               SizedBox(height: height * 0.05),
 
               TextFormField(
-                //controller: emailController,
-                controller: userNameController  ,
+                controller: emailController,
+                //controller: userNameController  ,
                 decoration: InputDecoration(
-                  labelText: "username",
+                  labelText: "email",
                   //labelText: "Email",
                   labelStyle: TextStyle(color: Colors.grey.shade600),
                   enabledBorder: UnderlineInputBorder(
@@ -95,10 +102,11 @@ class _SignInFormState extends State<SignInForm> {
               SizedBox(height: height * 0.02),
 
               TextFormField(
-                controller: passwordController,
+                controller: phoneNumberController,
+                //controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
-                  labelText: "Password",
+                  labelText: "phoneNumber",
                   labelStyle: TextStyle(color: Colors.grey.shade600),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey.shade300),
@@ -129,13 +137,16 @@ class _SignInFormState extends State<SignInForm> {
                 height: width * 0.13,
                 child: ElevatedButton(
                   onPressed: () {
-                    log('UserName : ${userNameController.text}');
-                    log('Password : ${passwordController.text}');
+                    log('email : ${emailController.text}');
+                    log(' phoneNumber: ${phoneNumberController.text}');
                     context.read<SignInBloc>().add(
                       SignInButtonPressed(
-                        //email,
-                        userNameController.text,
-                         passwordController.text,
+                      
+                         email : emailController.text.trim(),
+                         phoneNumber: phoneNumberController.text.trim(), 
+                         orgId: '',
+                         
+                    
                       )
                     );
                     // Navigator.push(
