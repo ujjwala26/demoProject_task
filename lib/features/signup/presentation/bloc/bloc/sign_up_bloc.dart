@@ -3,8 +3,6 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
-import 'package:meta/meta.dart';
-
 part 'sign_up_event.dart';
 part 'sign_up_state.dart';
 
@@ -14,7 +12,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<SignUpbuttonPressed>(signInButtonPressed);
   }
 
-  FutureOr<void> signInButtonPressed(SignUpbuttonPressed event, Emitter<SignUpState> emit) async{
+  Future<void> signInButtonPressed(SignUpbuttonPressed event, Emitter<SignUpState> emit) async{
 
     try{
       final response = await http.post(Uri.parse("https://dummyjson.com/users/add"),

@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:demoproject/features/home/presentation/pages/home_page.dart';
 import 'package:demoproject/features/signup/presentation/pages/sign_up.dart';
-import 'package:demoproject/features/singIn/presentation/bloc/bloc/sign_in_bloc.dart';
+import 'package:demoproject/features/singIn/presentation/bloc/signinBloc/sign_in_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

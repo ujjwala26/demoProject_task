@@ -1,4 +1,4 @@
-import 'package:demoproject/features/singIn/presentation/bloc/bloc/sign_in_bloc.dart';
+import 'package:demoproject/features/singIn/presentation/bloc/signinBloc/sign_in_bloc.dart';
 import 'package:demoproject/features/singIn/presentation/widgets/sign_in_background.dart';
 import 'package:demoproject/features/singIn/presentation/widgets/sign_in_form.dart';
 
