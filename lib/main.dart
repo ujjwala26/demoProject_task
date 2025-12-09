@@ -9,6 +9,8 @@ import 'package:demoproject/features/singIn/presentation/bloc/signinBloc/sign_in
 import 'package:demoproject/features/learnings/presentation/bloc/learningPage/learning_page_bloc.dart';
 import 'package:demoproject/features/services/presentation/bloc/bloc/servicesbloc_bloc.dart';
 import 'package:demoproject/features/singIn/presentation/pages/otp_verification.dart';
+import 'package:demoproject/features/singIn/presentation/pages/otp_verified_successfully.dart';
+import 'package:demoproject/features/singIn/presentation/pages/send_otp.dart';
 import 'package:demoproject/features/singIn/presentation/pages/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,7 +51,7 @@ class MyApp extends StatelessWidget {
           
           
 
-      ], child:otpVerificationScreen(),
+      ], child:OtpVerifiedSuccessfully(),
       ),
     );
   }

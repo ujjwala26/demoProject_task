@@ -15,7 +15,6 @@ class otpVerificationScreen extends StatelessWidget {
         children : [
           const SignInBackground(),
           SafeArea(
-          child: SafeArea(
             child: Center(
               child: SingleChildScrollView(
                 child: Column(
@@ -41,7 +40,6 @@ class otpVerificationScreen extends StatelessWidget {
               ),
             ),
           ),
-        ),
         ],
       ),
       
@@ -55,6 +53,7 @@ class otpVerificationScreen extends StatelessWidget {
     style: TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 35,
+      color: const Color.fromARGB(255, 10, 91, 11),
     ),);
   }
 
@@ -113,7 +112,7 @@ class otpVerificationScreen extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 18),
           recognizer: TapGestureRecognizer()..onTap=(){
-            print("clicked");
+            
             
           }
         ),
