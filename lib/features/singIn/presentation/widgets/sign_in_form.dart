@@ -1,6 +1,4 @@
 import 'dart:developer';
-
-import 'package:demoproject/features/home/presentation/pages/home_page.dart';
 import 'package:demoproject/features/signup/presentation/pages/sign_up.dart';
 import 'package:demoproject/features/singIn/presentation/bloc/signinBloc/sign_in_bloc.dart';
 import 'package:demoproject/features/singIn/presentation/pages/otp_verification.dart';
@@ -19,16 +17,17 @@ class _SignInFormState extends State<SignInForm> {
 
     //final emailController = TextEditingController();
     // final passwordController = TextEditingController();
-    // final userNameController= TextEditingController();
-    final emailController= TextEditingController();
-    final phoneNumberController=TextEditingController();
+     final userNameController= TextEditingController();
+    //final emailController= TextEditingController();
+    //
+    //final phoneNumberController=TextEditingController();
 
   @override
   void dispose() {
-    // userNameController.dispose();
+    userNameController.dispose();
     // passwordController.dispose();
-    emailController.dispose();
-    phoneNumberController.dispose();
+    //emailController.dispose();
+    //phoneNumberController.dispose();
     super.dispose();
   }
 
@@ -47,7 +46,12 @@ class _SignInFormState extends State<SignInForm> {
               backgroundColor: Colors.red,
             ),
           );
-        }else if (state is SignInSuccess){
+        }else if(state is SignInLoading){
+           CircularProgressIndicator();
+
+        }
+        else if (state is SignInSuccess){
+          //Navigator.pop(context);
           // ScaffoldMessenger.of(context).showSnackBar(
           //   const SnackBar(
           //     content: Text("Login Successful!"),
@@ -56,8 +60,14 @@ class _SignInFormState extends State<SignInForm> {
           // );
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => otpVerificationScreen(phoneNumber: phoneNumberController.text,
-              email : emailController.text,
+            MaterialPageRoute(builder: (_) => otpVerificationScreen(
+              //phoneNumber: phoneNumberController.text,
+              userName : userNameController.text.trim(), 
+
+              otp: state.otp, 
+              //enteredOtp: state.enteredOtp,
+              
+              
             )),
           );
         }
@@ -87,10 +97,10 @@ class _SignInFormState extends State<SignInForm> {
               SizedBox(height: height * 0.05),
 
               TextFormField(
-                controller: emailController,
-                //controller: userNameController  ,
+                //controller: emailController,
+                controller: userNameController  ,
                 decoration: InputDecoration(
-                  labelText: "email",
+                  labelText: "username",
                   //labelText: "Email",
                   labelStyle: TextStyle(color: Colors.grey.shade600),
                   enabledBorder: UnderlineInputBorder(
@@ -101,34 +111,34 @@ class _SignInFormState extends State<SignInForm> {
 
               SizedBox(height: height * 0.02),
 
-              TextFormField(
-                controller: phoneNumberController,
-                //controller: passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: "phoneNumber",
-                  labelStyle: TextStyle(color: Colors.grey.shade600),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey.shade300),
-                  ),
-                  suffix: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Forgot?",
-                      style: TextStyle(
-                        color: Colors.green.shade800,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+              // TextFormField(
+              //   controller: phoneNumberController,
+              //   //controller: passwordController,
+              //   obscureText: true,
+              //   decoration: InputDecoration(
+              //     labelText: "phoneNumber",
+              //     labelStyle: TextStyle(color: Colors.grey.shade600),
+              //     enabledBorder: UnderlineInputBorder(
+              //       borderSide: BorderSide(color: Colors.grey.shade300),
+              //     ),
+              //     suffix: TextButton(
+              //       onPressed: () {},
+              //       child: Text(
+              //         "Forgot?",
+              //         style: TextStyle(
+              //           color: Colors.green.shade800,
+              //           fontWeight: FontWeight.bold,
+              //         ),
+              //       ),
+              //     ),
 
-                  // suffixText: "Forgot",
-                  // suffixStyle: TextStyle(
-                  //   color: Colors.green.shade800,
-                  //   fontWeight: FontWeight.bold,
-                  // )
-                ),
-              ),
+              //     // suffixText: "Forgot",
+              //     // suffixStyle: TextStyle(
+              //     //   color: Colors.green.shade800,
+              //     //   fontWeight: FontWeight.bold,
+              //     // )
+              //   ),
+              // ),
 
               SizedBox(height: height * 0.05),
 
@@ -137,22 +147,21 @@ class _SignInFormState extends State<SignInForm> {
                 height: width * 0.13,
                 child: ElevatedButton(
                   onPressed: () {
-                    log('email : ${emailController.text}');
-                    log(' phoneNumber: ${phoneNumberController.text}');
+                    log('userName : ${userNameController.text}');
+                    //log(' phoneNumber: ${phoneNumberController.text}');
                     context.read<SignInBloc>().add(
                       SignInButtonPressed(
                       
-                         email : emailController.text.trim(),
-                         phoneNumber: phoneNumberController.text.trim(), 
-                         orgId: '',
+                         //email : emailController.text.trim(),
+                         //phoneNumber: phoneNumberController.text.trim(), 
+                         userName: userNameController.text,
+                         orgId: '1',
+                        // enteredOtp: '',
                          
                     
                       )
                     );
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => HomePage()),
-                    // );
+                  
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 10, 91, 11),
@@ -160,10 +169,12 @@ class _SignInFormState extends State<SignInForm> {
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  child: const Text(
-                    "Sign in",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
+                  child:
+                  // state is SignInLoading ? const CircularProgressIndicator(color: Colors.white) : const 
+                  Text("Sign in",
+                     style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+
                 ),
               ),
 
