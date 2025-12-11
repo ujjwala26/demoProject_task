@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
@@ -9,6 +8,7 @@ part 'otp_verification_state.dart';
 class OtpBloc extends Bloc<OtpVerificationEvent, OtpVerificationState> {
   OtpBloc() : super(OtpInitial()) {
     on<VerifyOtpSubmitted>(verifyOtp);
+
   }
 
  Future<void> verifyOtp(
@@ -31,7 +31,7 @@ class OtpBloc extends Bloc<OtpVerificationEvent, OtpVerificationState> {
 
     final data = jsonDecode(response.body);
 
-    if (response.statusCode == 200 && data['message'] == "OTP verified successfully") {
+    if (response.statusCode == 200) {
       emit(OtpVerifiedSuccess());
     } else {
       emit(OtpVerifiedFailure(data['message'] ?? "Issue in OTP Verification."));
@@ -40,5 +40,6 @@ class OtpBloc extends Bloc<OtpVerificationEvent, OtpVerificationState> {
     emit(OtpVerifiedFailure(e.toString()));
   }
 }
+
 
 }

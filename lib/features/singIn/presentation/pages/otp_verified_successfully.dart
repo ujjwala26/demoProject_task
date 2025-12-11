@@ -1,9 +1,29 @@
+import 'dart:async';
+
+import 'package:demoproject/features/home/presentation/pages/home_page.dart';
 import 'package:demoproject/features/singIn/presentation/widgets/sign_in_background.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class OtpVerifiedSuccessfully extends StatelessWidget {
+class OtpVerifiedSuccessfully extends StatefulWidget {
   const OtpVerifiedSuccessfully({super.key});
+
+  @override
+  State<OtpVerifiedSuccessfully> createState() => _OtpVerifiedSuccessfullyState();
+}
+
+class _OtpVerifiedSuccessfullyState extends State<OtpVerifiedSuccessfully> {
+    
+
+    @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Timer(Duration(seconds: 2), (){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +54,7 @@ class OtpVerifiedSuccessfully extends StatelessWidget {
       ),
     );
   }
+
    Widget HeadingTextWidget(){
     return Text("Congratulations !",
     style: TextStyle(
@@ -42,6 +63,7 @@ class OtpVerifiedSuccessfully extends StatelessWidget {
       fontWeight: FontWeight.bold
     ),);
   }
+
   Widget VerifiedTextWidget(){
     return Text("Verified Successfully!",
     style: TextStyle(
@@ -58,6 +80,7 @@ class OtpVerifiedSuccessfully extends StatelessWidget {
       width: 250),
     );
   }
+
   Widget ThankYouTextWidget(){
     return Text("Thank You !",
     style: TextStyle(

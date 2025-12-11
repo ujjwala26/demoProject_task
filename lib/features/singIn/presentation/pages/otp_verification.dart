@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
 
 import 'package:demoproject/features/singIn/presentation/bloc/otpBloc/otp_verification_bloc.dart';
-import 'package:demoproject/features/singIn/presentation/pages/otp_verified_successfully.dart';
 import 'package:demoproject/features/singIn/presentation/widgets/sign_in_background.dart';
 
 class otpVerificationScreen extends StatefulWidget {

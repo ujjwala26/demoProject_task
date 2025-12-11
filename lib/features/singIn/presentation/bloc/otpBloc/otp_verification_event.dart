@@ -20,3 +20,5 @@ class VerifyOtpSubmitted extends OtpVerificationEvent {
 
   
 }
+class otpVrifiedsuccessfully extends OtpVerificationEvent{}
+
