@@ -1,16 +1,13 @@
 
 import 'package:demoproject/core/shared_pref.dart';
 import 'package:demoproject/features/home/presentation/bloc/bloc/home_bloc_bloc.dart';
-import 'package:demoproject/features/home/presentation/pages/home_page.dart';
 import 'package:demoproject/features/profile/presentation/bloc/bloc/profile_bloc.dart';
+import 'package:demoproject/features/signup/data/auth/bloc/auth_bloc.dart';
 import 'package:demoproject/features/signup/presentation/bloc/bloc/sign_up_bloc.dart';
 import 'package:demoproject/features/singIn/presentation/bloc/otpBloc/otp_verification_bloc.dart';
 import 'package:demoproject/features/singIn/presentation/bloc/signinBloc/sign_in_bloc.dart';
 import 'package:demoproject/features/learnings/presentation/bloc/learningPage/learning_page_bloc.dart';
 import 'package:demoproject/features/services/presentation/bloc/bloc/servicesbloc_bloc.dart';
-import 'package:demoproject/features/singIn/presentation/pages/otp_verification.dart';
-import 'package:demoproject/features/singIn/presentation/pages/otp_verified_successfully.dart';
-import 'package:demoproject/features/singIn/presentation/pages/send_otp.dart';
 import 'package:demoproject/features/singIn/presentation/pages/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,6 +45,8 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context)=> HomeBlocBloc()),
           BlocProvider(create: (context)=> ProfileBloc()),
           BlocProvider(create: (context)=>OtpBloc()),
+          BlocProvider(create: (context)=>AuthBloc())
+
           
           
 

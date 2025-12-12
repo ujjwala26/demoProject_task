@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:demoproject/features/home/presentation/pages/home_page.dart';
+import 'package:demoproject/features/signup/data/auth/bloc/auth_bloc.dart';
 import 'package:demoproject/features/signup/presentation/bloc/bloc/sign_up_bloc.dart';
 import 'package:demoproject/features/signup/presentation/widgets/text_form_field.dart';
 import 'package:demoproject/features/singIn/presentation/pages/sign_in.dart';
@@ -17,30 +19,38 @@ class SignUpForm extends StatefulWidget {
 class _SignUpFormState extends State<SignUpForm> {
   File? _selectedImage;
 
-  final usernameController = TextEditingController();
+  final employeeNameController = TextEditingController();
+  final contactNoController=TextEditingController();
   final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
-  final mobController = TextEditingController();
+  final addressController = TextEditingController();
+  //   void initState() {
+  //   super.initState();
 
-  final firstNameController = TextEditingController();
-  final lastNameController = TextEditingController();
-  final ageController = TextEditingController();
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //     final authState = context.read<AuthBloc>().state;
+
+  //     if (authState is userVerifiedSuccessfully) {
+  //       employeeNameController.text = authState.userName ?? "";
+  //     }
+  //   });
+  // }
+
 
   @override
   void dispose() {
     emailController.dispose();
-    firstNameController.dispose();
-    lastNameController.dispose();
-    ageController.dispose();
-    usernameController.dispose();
-    passwordController.dispose();
+    contactNoController.dispose();
+    addressController.dispose();
+    employeeNameController.dispose();
+   
 
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    //final authState = context.watch<AuthBloc>().state;
+
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
@@ -98,7 +108,7 @@ class _SignUpFormState extends State<SignUpForm> {
             SnackBar(content: Text("Registered Successfully!"),
             backgroundColor: Colors.green,)
           );
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> SignInPage()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
         }
       },
       builder: (context, state) {
@@ -150,18 +160,13 @@ class _SignUpFormState extends State<SignUpForm> {
                   child: Column(
                     children: [
                       textFieldWidget(
-                        controller: firstNameController,
-                        labelText: "First Name ",
+                        controller: employeeNameController,
+                        labelText: "Employee Name ",
                       ),
                       SizedBox(height: height / 35),
                       textFieldWidget(
-                        controller: lastNameController,
-                        labelText: "Last Name",
-                      ),
-                      SizedBox(height: height / 35),
-                      textFieldWidget(
-                        controller: ageController,
-                        labelText: "Age",
+                        controller: contactNoController,
+                        labelText: "Contact No",
                       ),
                       SizedBox(height: height / 35),
                       textFieldWidget(
@@ -170,9 +175,14 @@ class _SignUpFormState extends State<SignUpForm> {
                       ),
                       SizedBox(height: height / 35),
                       textFieldWidget(
-                        controller: usernameController,
-                        labelText: "Username",
+                        controller: addressController,
+                        labelText: "Address",
                       ),
+                      SizedBox(height: height / 35),
+                      // textFieldWidget(
+                      //   controller: usernameController,
+                      //   labelText: "Username",
+                      // ),
 
                       // TextFormField(
                       //   controller: passwordController,
@@ -194,12 +204,12 @@ class _SignUpFormState extends State<SignUpForm> {
                       //     ),
                       //   ),
                       // ),
-                      SizedBox(height: height / 35),
+                      // SizedBox(height: height / 35),
 
-                      textFieldWidget(
-                        controller: confirmPasswordController,
-                        labelText: 'Password',
-                      ),
+                      // textFieldWidget(
+                      //   controller: confirmPasswordController,
+                      //   labelText: 'Password',
+                      // ),
                     ],
                   ),
                 ),
@@ -214,12 +224,14 @@ class _SignUpFormState extends State<SignUpForm> {
                   onPressed: () {
                     context.read<SignUpBloc>().add(
                       SignUpbuttonPressed(
-                        firstNameController.text,
-                        lastNameController.text,
-                        ageController.text,
-                        emailController.text,
-                        usernameController.text,
-                        passwordController.text,
+                      
+                        employeeName: employeeNameController.text,
+                        contactNo: contactNoController.text,
+                        emailId: emailController.text,
+                        address:addressController.text,
+
+                        
+                        
                       ),
                     );
                   },

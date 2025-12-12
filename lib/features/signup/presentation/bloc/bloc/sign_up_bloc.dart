@@ -9,24 +9,33 @@ part 'sign_up_state.dart';
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   SignUpBloc() : super(SignUpInitial()) {
 
-    on<SignUpbuttonPressed>(signInButtonPressed);
+    on<SignUpbuttonPressed>(updateEmployeeInfo);
   }
 
-  Future<void> signInButtonPressed(SignUpbuttonPressed event, Emitter<SignUpState> emit) async{
+  Future<void> updateEmployeeInfo(SignUpbuttonPressed event, Emitter<SignUpState> emit) async{
 
     try{
-      final response = await http.post(Uri.parse("https://dummyjson.com/users/add"),
+      //final response = await http.post(Uri.parse("https://dummyjson.com/users/add"),
+      final response = await http.put(Uri.parse("http://3.110.154.53:8001/api/employeeDetail/"),
       body: jsonEncode({
-        "firstname" : event.firstname,
-        "lastname": event.lastname,
-        "age" : event.age,
-        "email" : event.email,
-        "username" : event.username,
-        "password" : event.password,
+        //"empId":event.empId,
+        "employeeName" : event.employeeName,
+        //"employeeCode": event.employeeCode,
+        "contactNo" : event.contactNo,
+        "emailId" : event.emailId,
+        "address" : event.address,
+       // "orgId" : event.orgId,
+        //"createdBy": event.createdBy,
+        //"lastUpdatedBy":event.lastUpdatedBy,
+       // event.body
       }),
-      headers: {"Content-Type": "application/json"},
+      headers: {
+        "Content-Type": "application/json",
+        //"Authorization": "Bearer ${event.token}",
+      },
+      
       );
-      if(response.statusCode==201){
+      if(response.statusCode==200){
         emit(SignUpSuccess());
       }else{
         emit(SignUpFailure("failed : ${response.body}"));

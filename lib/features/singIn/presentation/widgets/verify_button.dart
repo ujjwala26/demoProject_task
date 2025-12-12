@@ -1,3 +1,4 @@
+import 'package:demoproject/features/signup/presentation/bloc/bloc/sign_up_bloc.dart';
 import 'package:demoproject/features/singIn/presentation/bloc/otpBloc/otp_verification_bloc.dart';
 import 'package:demoproject/features/singIn/presentation/pages/otp_verified_successfully.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class VerifyButtonWidget extends StatelessWidget {
  final TextEditingController otpController;
  
 
-   VerifyButtonWidget({
+  const VerifyButtonWidget({
     super.key,
     //required this.email,
    // required this.orgId,
@@ -37,12 +38,18 @@ class VerifyButtonWidget extends StatelessWidget {
     return BlocConsumer<OtpBloc, OtpVerificationState>(
       listener: (context, state) {
         if (state is OtpVerifiedSuccess) {
-          Navigator.pushReplacement(
+          
+          Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => OtpVerifiedSuccessfully(),
+              builder: (_) =>BlocProvider(
+      create: (_) => SignUpBloc(),
+      child: OtpVerifiedSuccessfully(data: state.data,),
+    ),
             ),
           );
+
+
         } else if (state is OtpVerifiedFailure) {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(state.message)));

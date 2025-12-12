@@ -32,7 +32,7 @@ class OtpBloc extends Bloc<OtpVerificationEvent, OtpVerificationState> {
     final data = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      emit(OtpVerifiedSuccess());
+      emit(OtpVerifiedSuccess(data));
     } else {
       emit(OtpVerifiedFailure(data['message'] ?? "Issue in OTP Verification."));
     }

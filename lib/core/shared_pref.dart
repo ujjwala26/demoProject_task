@@ -28,4 +28,15 @@ class AppPrefs{
     await prefs.remove('refresh_token');
 
   }
+  static Future<bool>getLoginStatus()async{
+    SharedPreferences prefs=await SharedPreferences.getInstance();
+    return prefs.getBool('isLoggedIn') ?? false;
+
+  }
+
+  static Future<void> clearLoginStatus()async{
+    SharedPreferences prefs= await SharedPreferences.getInstance();
+    await prefs.remove('isLoggedIn');
+
+  }
 }

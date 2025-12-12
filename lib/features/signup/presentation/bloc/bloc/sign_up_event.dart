@@ -4,15 +4,31 @@ abstract class SignUpEvent {}
 
 class SignUpbuttonPressed extends SignUpEvent{
 
-  final String firstname;
-  final String lastname;
-  final String age;
-  final String email;
-  final String username ;
-  final String password;
+  //final int empId;
+  final String employeeName;
+  //final String employeeCode;
+  final String contactNo;
+  final String emailId ;
+  final String address;
+  //final String orgId;
+  //final int createdBy;
+  //final int lastUpdatedBy;
 
 
-  SignUpbuttonPressed(this.username, this.lastname, this.firstname, this.age, this.email, this.password);
+
+  SignUpbuttonPressed({
+    //required this.empId, 
+    required this.employeeName, 
+    //required this.employeeCode,
+    required this.contactNo,
+    required this.emailId,
+    required this.address,
+    //required this.orgId, 
+    //required this.createdBy, 
+    //required this.lastUpdatedBy, 
+  }
+    );
+      
 
 }
 
