@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:demoproject/core/shared_pref.dart';
 import 'package:http/http.dart' as http;
 
 
@@ -34,11 +35,13 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
               // final refresh = data["refresh"];
               
               final String otp=data['data']['otp']?.toString() ?? '';
+              await AppPrefs.saveUserName(userName: '');
+
 
                 emit(SignInSuccess(otp:otp, userName: '',));
               if(otp.isNotEmpty){
               }else{
-                // emit(SignInFailure("OTP not found in response"));
+                 emit(SignInFailure("OTP not found in response"));
               }
               
 

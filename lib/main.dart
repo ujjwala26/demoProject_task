@@ -1,5 +1,4 @@
 
-import 'package:demoproject/core/shared_pref.dart';
 import 'package:demoproject/features/home/presentation/bloc/bloc/home_bloc_bloc.dart';
 import 'package:demoproject/features/profile/presentation/bloc/bloc/profile_bloc.dart';
 import 'package:demoproject/features/signup/data/auth/bloc/auth_bloc.dart';
@@ -17,17 +16,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  String? token = await AppPrefs.getAccessToken();
+ 
   
  
   runApp(MyApp(
-    isLoggedIn: token !=null,
+  
   ));
 }
 
 class MyApp extends StatelessWidget {
-  final bool isLoggedIn;
-  const MyApp({super.key, required this.isLoggedIn});
+
 
   
   @override

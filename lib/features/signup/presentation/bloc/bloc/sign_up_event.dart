@@ -2,34 +2,25 @@ part of 'sign_up_bloc.dart';
 
 abstract class SignUpEvent {}
 
-class SignUpbuttonPressed extends SignUpEvent{
-
-  //final int empId;
+class SignUpbuttonPressed extends SignUpEvent {
+  final int empId;
   final String employeeName;
-  //final String employeeCode;
   final String contactNo;
-  final String emailId ;
+  final String emailId;
   final String address;
-  //final String orgId;
-  //final int createdBy;
-  //final int lastUpdatedBy;
+  final String employeeId;
+  final String orgId;
+  final int createdBy;
+  final int lastUpdatedBy;
 
-
-
-  SignUpbuttonPressed({
-    //required this.empId, 
-    required this.employeeName, 
-    //required this.employeeCode,
+  SignUpbuttonPressed(this.employeeId, {
+    required this.empId,
+    required this.employeeName,
     required this.contactNo,
     required this.emailId,
     required this.address,
-    //required this.orgId, 
-    //required this.createdBy, 
-    //required this.lastUpdatedBy, 
-  }
-    );
-      
-
+    required this.orgId,
+    required this.createdBy,
+    required this.lastUpdatedBy,
+  });
 }
-
-

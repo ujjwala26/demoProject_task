@@ -22,7 +22,7 @@ Future<void> showLogoutPopup(BuildContext context) {
               onPressed: () async {
                 Navigator.pop(context); 
 
-                await AppPrefs.clearTokens();
+                await AppPrefs.clearLoginData();
 
                 Navigator.pushReplacement(
                   context,

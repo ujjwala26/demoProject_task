@@ -1,6 +1,6 @@
 import 'dart:io';
+import 'package:demoproject/core/shared_pref.dart';
 import 'package:demoproject/features/home/presentation/pages/home_page.dart';
-import 'package:demoproject/features/signup/data/auth/bloc/auth_bloc.dart';
 import 'package:demoproject/features/signup/presentation/bloc/bloc/sign_up_bloc.dart';
 import 'package:demoproject/features/signup/presentation/widgets/text_form_field.dart';
 import 'package:demoproject/features/singIn/presentation/pages/sign_in.dart';
@@ -10,7 +10,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SignUpForm extends StatefulWidget {
-  const SignUpForm({super.key});
+  final String employeeId;
+  final int empId;
+  final String orgId;
+  final int createdBy;
+  final int lastUpdatedBy;
+
+  const SignUpForm({
+    super.key,
+    this.employeeId = '',
+    required this.empId,
+    required this.orgId,
+    required this.createdBy,
+    required this.lastUpdatedBy,
+  });
 
   @override
   State<SignUpForm> createState() => _SignUpFormState();
@@ -23,6 +36,9 @@ class _SignUpFormState extends State<SignUpForm> {
   final contactNoController=TextEditingController();
   final emailController = TextEditingController();
   final addressController = TextEditingController();
+
+
+
   //   void initState() {
   //   super.initState();
 
@@ -35,6 +51,27 @@ class _SignUpFormState extends State<SignUpForm> {
   //   });
   // }
 
+@override
+  void initState() {
+    super.initState();
+
+    Future<void> loadEmail() async {
+      emailController.text = await AppPrefs.getEmail() ?? "";
+    }
+
+    Future<void> loadUserData() async {
+      final user = await AppPrefs.getUserData();
+      if (user.isNotEmpty) {
+        employeeNameController.text = user['employeeName']?.toString() ?? user['userName']?.toString() ?? '';
+        contactNoController.text = user['phoneNumber']?.toString() ?? user['contactNo']?.toString() ?? '';
+        emailController.text = user['email']?.toString() ?? user['emailId']?.toString() ?? emailController.text;
+        addressController.text = user['address']?.toString() ?? '';
+      }
+    }
+
+    loadEmail();
+    loadUserData();
+  }
 
   @override
   void dispose() {
@@ -49,12 +86,15 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("Loaded email: ${emailController.text}");
+
+    
     //final authState = context.watch<AuthBloc>().state;
 
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    Future<void> _pickImageFromGallery() async {
+    Future<void> pickImageFromGallery() async {
       final pickedImage = await ImagePicker().pickImage(
         source: ImageSource.gallery,
       );
@@ -66,7 +106,7 @@ class _SignUpFormState extends State<SignUpForm> {
       });
     }
 
-    Future<void> _pickImageFromCamera() async {
+    Future<void> pickImageFromCamera() async {
       final pickedImage = await ImagePicker().pickImage(
         source: ImageSource.camera,
       );
@@ -131,7 +171,7 @@ class _SignUpFormState extends State<SignUpForm> {
               SizedBox(height: height / 40),
 
               GestureDetector(
-                onTap: _pickImageFromGallery,
+                onTap: pickImageFromGallery,
                 child: CircleAvatar(
                   radius: width * 0.13,
 
@@ -149,7 +189,7 @@ class _SignUpFormState extends State<SignUpForm> {
               SizedBox(height: height / 35),
 
               GestureDetector(
-                onTap: _pickImageFromCamera,
+                onTap: pickImageFromCamera,
                 child: const Icon(Icons.camera_alt, size: 28),
               ),
 
@@ -172,6 +212,8 @@ class _SignUpFormState extends State<SignUpForm> {
                       textFieldWidget(
                         controller: emailController,
                         labelText: "Email",
+                        //enabled: false,
+                        
                       ),
                       SizedBox(height: height / 35),
                       textFieldWidget(
@@ -221,14 +263,21 @@ class _SignUpFormState extends State<SignUpForm> {
                 width: width * 0.9,
                 height: height * 0.050,
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async{
                     context.read<SignUpBloc>().add(
                       SignUpbuttonPressed(
-                      
-                        employeeName: employeeNameController.text,
-                        contactNo: contactNoController.text,
-                        emailId: emailController.text,
-                        address:addressController.text,
+                        widget.employeeId,
+                          empId: widget.empId,
+                          employeeName: employeeNameController.text,
+                          contactNo: contactNoController.text,
+                          emailId: emailController.text,
+                          address: addressController.text,
+                          orgId: widget.orgId,
+                          createdBy: widget.createdBy,
+                          lastUpdatedBy: widget.lastUpdatedBy,
+                          
+                        
+                        
 
                         
                         
